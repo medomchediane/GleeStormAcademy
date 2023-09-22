@@ -1,0 +1,58 @@
+<?php
+
+  $servername="localhost";
+  $username="root";
+  $password="";
+  $dbname="forms";
+
+  try{
+    $conn = new PDO("mysql:host= $username; dbname=$dbname",$username;$password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Votre message a ete envoye! <br> Merci!!";
+  }
+  catch (PDOExcwption $e){
+    echo " L'envoie a echoue" .$se->getMessage();
+  }
+  if( isset( $_POST['submit'];
+  $_POST['name'];
+  $_POST['email'];
+  $_POST['subject'];
+  $_POST['message'];
+
+  $sql = ("INSERT INTO 'users'('name','email','subject','message')VALUE (:name, :email, :subject, :name,)"; 
+  $stmt = $conn->prepare($sql);
+
+  $stmt->binParram(':nom' $name);
+  $stmt->binParram(':email' $email);
+  $stmt->binParram(':subject' $subject);
+  $stmt->binParram(':message' $message);
+  $stmt->execute();
+  )
+  )
+
+  )
+
+
+  $receiving_email_address = 'info@gleestormacademy.com';
+
+  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
+    include( $php_email_form );
+  } else {
+    die( 'Unable to load the "PHP Email Form" Library!');
+  }
+
+  $contact = new PHP_Email_Form;
+  $contact->ajax = true;
+  
+  $contact->to = $receiving_email_address;
+  $contact->from_name = $_POST['name'];
+  $contact->from_email = $_POST['email'];
+  $contact->subject = $_POST['subject'];
+  
+
+  $contact->add_message( $_POST['name'], 'From');
+  $contact->add_message( $_POST['email'], 'Email');
+  $contact->add_message( $_POST['message'], 'Message', 10);
+
+  echo $contact->send();
+?>
